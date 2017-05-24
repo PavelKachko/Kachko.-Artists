@@ -1,0 +1,21 @@
+﻿<script>
+var artists = [];
+ 
+// Здесь должно было быть fetch("http://localhost:3012/artists"), но у нас нет NodeJS хостинга, чтобы потестить:
+fetch("http://artists.freeiz.com/artists.json")
+.then(function(response){
+console.log("Artists loaded from server.");
+return response.json();
+})
+.then(function(data){
+artists = data;
+
+if(artists != null){
+    for(var i = 0, n = artists.length, currentArtist = artists[0]; i<n; currentArtist = artists[++i]){
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode("Artist id: "+ currentArtist.id + ",  Artist name: " + currentArtist.name + "\n"));
+        document.body.appendChild(div);
+    }
+}
+});
+</script>
